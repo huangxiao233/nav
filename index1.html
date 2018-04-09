@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航专家，中国最纯粹的导航工具</title>
+    <link rel="stylesheet" href="./style1.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <main class="key" >
+        <div class="wrapper" id="nav"></div>
+      
+    
+
+    </main>
+    <script>
+        // 1.初始化数据
+        var hashA = init()
+        var keys = hashA['keys']
+        var hash = hashA['hash']
+        //2.生成键盘
+        //遍历keys，生成标签
+        generateKeyboard(keys,hash)
+        //3.监听用户动作
+        listenToUser(hash)
+        //下面是工具函数
+        function getFromLocalStotage(name){
+            return JSON.parse(localStorage.getItem(name)|| 'null')
+        }
+        function tag(tagName){
+            return document.createElement(tagName)
+        }
+        function creatSpan(textContent){
+            var span = tag('span')
+            span.textContent = textContent
+            span.className = "text"
+            return span
+        }
+        function creatButton(id){
+            var button = tag("button")
+            button.textContent = "编辑"
+            button.id = id
+            button.onclick  = function(y){
+                var button2 = y["target"]
+                var img2 =button2.previousSibling
+                var key = button2["id"]
+                var x = prompt('给我网址')
+                map[key] = x
+                img2.src = "http://" +x +"/favicon.ico"
+                img2.onerror = function(xxx){
+                    xxx.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                } 
+                localStorage.setItem('cunchu',JSON.stringify(map))
+            }
+            return button
+        }
+        function creatImage(domain){
+            var img = tag("img")
+            if(domai){
+                img.src = "http://"+domain +"/favicon.ico"
+            }else{
+                img.src = "//i.loli.net/2017/11/10/5a05afbc5e183.png"
+            }
+            img.onerror = function(xxx){
+                xxx.target.src = "//i.loli.net/2017/11/10/5a05afbc5e183.png"
+     
+            }
+            return img
+        }
+        function init(){
+           var  hash = {
+                    0:['q','w','e','r','t','y','u','i','o','p'],
+                    1:['a','s','d','f','g','h','j','k','l'],
+                    2:['z','x','c','v','b','n','m'],
+                    'length' : 3,}
+           
+           var map = {'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com' , 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn'} 
+           
+           var hashInLocalStorage = getFromLocalStotage("cunchu")
+           if(hashInLocalStorage){
+             map = hashInLocalStorage
+           }
+           return {
+               "hash":hash,
+               "map":map
+           }
+        }
+ 
+        function generateKeyboard(hash,map){
+            for (var index=0;index<hash["length"];index++){
+                var div = tag("div")
+                div.className = "row"
+
+                main.appendChild(div)
+            var row = keys[index]
+            for(var index2=0;index2<row["length"];index2++){
+                var span = creatSpan(row[index2])
+                var button = creatButton(row[index2])
+                var img = creatImage(map[row[index2]])
+                var kbd = tag("kbd")
+                kbd.className = "newkey"
+                kbd.appendChild(span)
+                kbd.appendChild(button)
+                kbd.appendChild(img)
+
+                div.appendChild(kbd)
+            }
+        }
+
+    }      
+            function listenToUser(map){
+                document.onkeypress = function(z){
+                    var key = z['key']
+                    var website = map[key]
+                    window.open("http://" +website,"_blank")
+                       }
+                }
+            
+        
+             
+            
+        index1=0
+        while (index1 < hash['length']){
+            div = document.createElement('div')  //创建三行div
+            div.className = "row"
+            nav.appendChild(div)
+            index2=0
+            z=hash[index1]
+                       
+            while(index2 < z['length']){
+                kbd = document.createElement('kbd') 
+                kbd.className = 'newkey'
+                span = document.createElement('span')
+                span.textContent =  z[index2]
+                img = document.createElement("img")
+                if(map[z[index2]]){
+                    img.src = "http://" + map[z[index2]] + "/favicon.ico"
+                    console.log(map[z[index2]])
+                }
+                else{
+                    img.src = "file:///C:/Users/bigdog695/Desktop/导航/undefined.jpg"
+                    }
+                    // 如果第一个判断错误了，就走这一步
+                // img.onerror = function(e){
+                //     // 找出谁错了
+                //     console.log("下载失败")
+                //     console.log(e)
+                //     e.target.src = "file:///C:/Users/bigdog695/Desktop/导航/undefined.jpg"
+                // }
+
+                div.appendChild(kbd)
+                button = document.createElement('button')
+                
+                button.onclick = function(y){
+                    
+                    a = (y["target"].id)
+                    button2 = y["target"]
+                    img2 = button2.previousSibling
+                    key = button2['id']
+                    input = prompt("请输入一个网址：")
+                    map[a] = input
+                    img2.src = "http://" + input + "/favicon.ico"
+                    localStorage.setItem("cunchu" ,JSON.stringify(map))
+                    console.log(map)
+                }
+                button.id = z[index2]
+                kbd.appendChild(span)
+                kbd.appendChild(img)
+                kbd.appendChild(button)
+                index2 += 1
+                
+           }
+              
+         index1 += 1
+        } 
+// 监听键盘事件        
+        document.onkeypress = function(x){
+          key = x['key']  //取得那些字母
+          website = map[key]
+          window.open("http://" + website)
+        }
+    </script>
+    <footer>
+        
+    </footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+kbd{
+   
+    display: inline-block;
+    height : 50px;
+    width:50px;
+    font-size: 1.5em;
+    margin: 10px;
+    position: relative;
+    
+}
+body{
+    
+
+    background: grey url(./star.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    /* 图片自适应 */
+    
+}
+#nav div:nth-child(2){
+    margin-left: 1em;
+}
+#nav div:nth-child(3){
+    margin-left: 1.4em;
+}
+.key{
+    text-align: center;
+    
+}
+#nav{
+    display: inline-block;
+}
+kbd{
+    position: relative;
+    line-height: 10px;  
+    padding:20px 20px 20px 20px;
+}
+button{
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    display: none;
+   
+}
+kbd:hover button{
+/* 空格容易错，不要有空格 KBD:hover    */
+    display: inline-block;
+
+}
+kbd:hover {
+    box-shadow: 0px 0px 31px -7px rgba(0,0,0,0.75);
+    transition: 1s;
+}
+
+
+span{
+    line-height:50px; 
+}
+.newkey{
+    width:50px;
+    height:40px;
+    
+    /* / 内容居中 */ 
+     display: inline-flex;
+    justify-content:center;
+    align-items: center; 
+    background: linear-gradient(to bottom,#292929 0%,#111111 100%); 
+    border: 2px solid #373737; color: #C5C5C5; border-radius: 6px; 
+    font-size: 20px; font-family: Helvetica;
+    box-shadow: 0 0 0 1px #1A1B1C, 0 0 0 2px #1F2020, 0 3px 0 2px #080808;
+    /* 左右，上下，虚化，边框 */
+}
+main{
+    /* 垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    /* 这个单位表示的是视口高度 */
+    
+}
+.wrapper{
+    background: rgba(255, 255, 255, 0.2);
+}
+.newkey{
+    position:relative;
+}
+.newkey>img{
+    width:16px;
+    height:16px;
+    position:absolute;
+    bottom: 2px;
+    left:2px;
+}
